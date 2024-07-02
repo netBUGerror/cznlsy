@@ -1,6 +1,7 @@
 package com.aaa.controller;
 
 import com.aaa.entity.Bz;
+import com.aaa.entity.Category;
 import com.aaa.entity.Goods;
 import com.aaa.entity.GoodsVO;
 import com.aaa.service.IBzService;
@@ -11,29 +12,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 @RequestMapping("/bz")
 @RestController
 public class BzController {
     @Autowired
     private IBzService BzService;
-    @GetMapping("/list")  //等价于RequestMapping设置了请求方法为GET
-    public PageInfo<Bz> list(Integer pageNum, Integer pageSize){
-        PageInfo<Bz> pi = BzService.list(pageNum,pageSize);
-        return pi;
+    @GetMapping("/bzlist")  //等价于RequestMapping设置了请求方法为GET
+    public List<Bz> list(){
+        return BzService.list();
     }
-    @PostMapping("/add")
+    @PostMapping("/bzadd")
     public CommonResult add(@RequestBody Bz bz){
         BzService.Bzinsert(bz);
         return CommonResult.RESULT_SUCCESS;
     }
-    @PostMapping("/update")
+    @PostMapping("/bzupdate")
     public CommonResult update(@RequestBody Bz bz){
         BzService.Bzupdate(bz);
         return CommonResult.RESULT_SUCCESS;
     }
 
-    @DeleteMapping("/delete/{sym}")
+    @DeleteMapping("/bzdelete/{sym}")
     public CommonResult delete(@PathVariable("sym") String sym){
         BzService.Bzdelete(sym);
         return CommonResult.RESULT_SUCCESS;
