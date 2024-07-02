@@ -5,4 +5,28 @@
     <select id="findAll" resultType="Sc">
         select * from sc
     </select>
+    <insert id="addSc" parameterType="Sc">
+        insert into sc
+        (sjlx,sjclr,cplx,sjnr,sym,sjfssj,lrr,lrsj,xgr,xgsj)
+        VALUES
+        (#{sjlx},#{sjclr},#{cplx},#{sjnr},#{sym},#{sjfssj},#{lrr},#{lrsj},#{xgr},#{xgsj})
+    </insert>
+    <update id="editSc" parameterType="Sc">
+        update sc
+        set scsjbh=#{scsjbh},
+        sjlx = #{sjlx},
+        sjclr = #{sjclr},
+        cplx = #{cplx},
+        sjnr = #{sjnr}
+        sjfssj = #{sjfssj}
+        lrr = #{lrr}
+        lrsj = #{lrsj}
+        xgr = #{xgr}
+        xgsj = #{xgsj}
+        where sym = #{sym}
+    </update>
+    <delete id="delSc">
+        delete from sc
+        where sym = #{sym}
+    </delete>
 </mapper>
