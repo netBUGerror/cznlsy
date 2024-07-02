@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.mapper.GoodsMapper">
+
+    <resultMap id="goodsMap" type="Goods" autoMapping="true">
+        <association property="category" javaType="Category" autoMapping="true">
+        </association>
+    </resultMap>
+
+    <select id="findAll" parameterType="GoodsVO" resultMap="goodsMap">
+       select
+            g.goodsId,g.goodsName,g.price,g.address,g.produceDate,
+            c.categoryId,c.categoryName
+        from goods g
+        join category c
+        on g.categoryId = c.categoryId
+        <where>
+            <if test="goodsName!=null and goodsName!=''">
+                and g.goodsName like concat('%',#{goodsName},'%')
+            </if>
+            <if test="startDate!=null">
+                and g.produceDate>=#{startDate}
+            </if>
+            <if test="endDate!=null">
+                <![CDATA[
+                  and g.produceDate<=#{endDate}
+                ]]>
+            </if>
+        </where>
+        ORDER  by g.goodsId
+    </select>
+    <select id="findById" parameterType="int" resultMap="goodsMap">
+        select
+        g.goodsId,g.goodsName,g.price,g.address,g.produceDate,
+        c.categoryId,c.categoryName
+        from goods g
+        join category c
+        on g.categoryId = c.categoryId
+        where goodsId = #{goodsId}
+    </select>
+    <insert id="doAdd" parameterType="Goods">
+        insert into goods
+        (goodsName,price,address,produceDate,categoryId)
+        VALUES
+        (#{goodsName},#{price},#{address},#{produceDate},#{category.categoryId})
+    </insert>
+    <update id="doUpdate" parameterType="Goods">
+        update goods
+        set goodsName=#{goodsName},
+            price = #{price},
+            address=#{address},
+            produceDate = #{produceDate},
+            categoryId = #{category.categoryId}
+        where goodsId = #{goodsId}
+    </update>
+    <delete id="doDelete">
+        delete from goods
+        where goodsId = #{goodsId}
+    </delete>
+</mapper>

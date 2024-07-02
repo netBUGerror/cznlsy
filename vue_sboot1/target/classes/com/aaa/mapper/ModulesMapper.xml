@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.mapper.ModulesMapper">
+    <resultMap id="modulesMap" type="modules" autoMapping="true">
+        <id property="moduleCode" column="p_moduleCode"/>
+        <result property="moduleType" column="p_moduleType"/>
+        <result property="moduleText" column="p_moduleText"/>
+        <result property="moduleUrl" column="p_moduleUrl"/>
+        <result property="moduleIcon" column="p_moduleIcon"/>
+        <result property="parentCode" column="p_parentCode"/>
+        <collection property="subModules" ofType="modules" autoMapping="true">
+        </collection>
+    </resultMap>
+    <select id="findAll"  resultMap="modulesMap">
+        select
+            p.moduleCode p_moduleCode,
+            p.moduleType p_moduleType,
+            p.moduleText p_moduleText,
+            p.moduleUrl  p_moduleUrl,
+            p.moduleIcon p_moduleIcon,
+            p.parentCode p_parentCode,
+            s.moduleCode,s.moduleType,
+            s.moduleText,s.moduleUrl,
+            s.moduleIcon,s.parentCode
+        from modules p
+        join modules s
+        on p.moduleCode = s.parentCode
+        where p.parentCode='L01'
+    </select>
+
+</mapper>
