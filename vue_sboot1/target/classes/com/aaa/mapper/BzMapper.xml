@@ -5,4 +5,29 @@
     <select id="findAll" resultType="Bz">
         select * from bz
     </select>
+    <insert id="addBz" parameterType="Bz">
+        insert into bz
+        (bzdx,bzgg,bzr,bzsj,bzsl,bzdd,sym,lrr,lrsj,xgr,xgsj)
+        VALUES
+        (#{bzdx},#{bzgg},#{bzr},#{bzsj},#{bzsl},#{bzdd},#{sym},#{lrr},#{lrsj},#{xgr},#{xgsj})
+    </insert>
+    <update id="editBz" parameterType="Bz">
+        update bz
+        set scsjbh=#{scsjbh},
+        bzdx = #{bzdx},
+        bzgg=#{bzgg},
+        bzr = #{bzr},
+        bzsj = #{bzsj}
+        bzsl = #{bzsl}
+        bzdd = #{bzdd}
+        lrr = #{lrr}
+        lrsj = #{lrsj}
+        xgr = #{xgr}
+        xgsj = #{xgsj}
+        where sym = #{sym}
+    </update>
+    <delete id="delBz">
+        delete from bz
+        where sym = #{sym}
+    </delete>
 </mapper>
