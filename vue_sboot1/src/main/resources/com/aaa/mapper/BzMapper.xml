@@ -9,7 +9,7 @@
         insert into bz
         (bzdx,bzgg,bzr,bzsj,bzsl,bzdd,sym,lrr,lrsj,xgr,xgsj)
         VALUES
-        (#{bzdx},#{bzgg},#{bzr},#{bzsj},#{bzsl},#{bzdd},#{sym},#{lrr},#{lrsj},#{xgr},#{xgsj})
+        (#{bzdx},#{bzgg},#{bzr},#{bzsj},#{bzsl},#{bzdd},#{sym},#{lrr},now(),#{xgr},now())
     </insert>
     <update id="editBz" parameterType="Bz">
         update bz

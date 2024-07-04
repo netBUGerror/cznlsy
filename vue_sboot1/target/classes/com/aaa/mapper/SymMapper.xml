@@ -5,4 +5,7 @@
     <insert id="addSym" parameterType="Sym">
         insert into sym (ncplxbh,dlxxbh,sym,lrsj,xgsj)values(#{ncplxbh},#{dlxxbh},#{sym},now(),now())
     </insert>
+    <select id="findAllSym" resultType="Sym">
+        select sym from sym
+    </select>
 </mapper>

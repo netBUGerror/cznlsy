@@ -7,11 +7,13 @@ import com.aaa.service.INcplxService;
 import com.aaa.service.ISymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -34,6 +36,10 @@ public class SymController {
 
         symService.addSym(sym1);
         return 1;
+    }
+    @GetMapping("/findAllSym")
+    public List<Sym> findAllSym(){
+        return symService.findAllSym();
     }
 
 }
